@@ -34,7 +34,7 @@ export const LearnerDashboardHeader = () => {
         secondaryMenuItems={learnerHomeHeaderMenu.secondaryMenu}
         userMenuItems={learnerHomeHeaderMenu.userMenu}
       />
-      <MasqueradeBar />
+      {/* <MasqueradeBar /> */}
     </>
   );
 };

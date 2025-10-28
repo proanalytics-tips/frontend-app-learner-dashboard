@@ -20,7 +20,8 @@
     "test": "TZ=GMT fedx-scripts jest --coverage --passWithNoTests",
     "quality": "npm run lint-fix && npm run test",
     "watch-tests": "jest --watch",
-    "types": "tsc --noEmit"
+    "types": "tsc --noEmit",
+    "wdev": "cross-env PUBLIC_PATH=/learner-dashboard/ MFE_CONFIG_API_URL='http://localhost:8000/api/mfe_config/v1' fedx-scripts webpack-dev-server --progress --host apps.local.openedx.io --config webpack.dev-extract-css.config.js"
   },
   "author": "edX",
   "license": "AGPL-3.0",
@@ -45,6 +46,7 @@
     "@reduxjs/toolkit": "^2.0.0",
     "classnames": "^2.3.1",
     "core-js": "3.46.0",
+    "cross-env": "^10.1.0",
     "filesize": "^10.0.0",
     "font-awesome": "4.7.0",
     "history": "5.3.0",
