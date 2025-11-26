@@ -1,10 +1,13 @@
 import React from 'react';
 
 import { reduxHooks } from 'hooks';
+import useCourseListData from 'containers/CoursesPanel/hooks';
 import { RequestKeys } from 'data/constants/requests';
 import SelectSessionModal from 'containers/SelectSessionModal';
 import CoursesPanel from 'containers/CoursesPanel';
 import DashboardModalSlot from 'plugin-slots/DashboardModalSlot';
+import { getLocale } from '@edx/frontend-platform/i18n';
+import { PluginSlot } from '@openedx/frontend-plugin-framework';
 
 import LoadingView from './LoadingView';
 import DashboardLayout from './DashboardLayout';
@@ -12,31 +15,38 @@ import hooks from './hooks';
 import './index.scss';
 
 export const Dashboard = () => {
-  hooks.useInitializeDashboard();
+  // hooks.useInitializeDashboard();
   const { pageTitle } = hooks.useDashboardMessages();
   const hasCourses = reduxHooks.useHasCourses();
   const initIsPending = reduxHooks.useRequestIsPending(RequestKeys.initialize);
   const showSelectSessionModal = reduxHooks.useShowSelectSessionModal();
 
+  const locale = getLocale();
+
   return (
-    <div id="dashboard-container" className="d-flex flex-column p-2 pt-0">
-      <h1 className="sr-only">{pageTitle}</h1>
-      {!initIsPending && (
-        <>
-          <DashboardModalSlot />
-          {(hasCourses && showSelectSessionModal) && <SelectSessionModal />}
-        </>
-      )}
-      <div id="dashboard-content" data-testid="dashboard-content">
-        {initIsPending
-          ? (<LoadingView />)
-          : (
-            <DashboardLayout>
-              <CoursesPanel />
-            </DashboardLayout>
-          )}
+    <PluginSlot
+      id="org.openedx.frontend.learner_dashboard"
+      pluginProps={{ locale}}
+    >
+      <div id="dashboard-container" className="d-flex flex-column p-2 pt-0">
+        <h1 className="sr-only">{pageTitle}</h1>
+        {!initIsPending && (
+          <>
+            <DashboardModalSlot />
+            {(hasCourses && showSelectSessionModal) && <SelectSessionModal />}
+          </>
+        )}
+        <div id="dashboard-content" data-testid="dashboard-content">
+          {initIsPending
+            ? (<LoadingView />)
+            : (
+              <DashboardLayout>
+                <CoursesPanel />
+              </DashboardLayout>
+            )}
+        </div>
       </div>
-    </div>
+    </PluginSlot>
   );
 };
 
