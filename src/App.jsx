@@ -5,7 +5,6 @@ import { useIntl } from '@edx/frontend-platform/i18n';
 import { logError } from '@edx/frontend-platform/logging';
 import { initializeHotjar } from '@edx/frontend-enterprise-hotjar';
 
-
 import { ErrorPage, AppContext } from '@edx/frontend-platform/react';
 import { FooterSlot } from '@edx/frontend-component-footer';
 import { Alert } from '@openedx/paragon';
@@ -75,8 +74,8 @@ export const App = () => {
   return (
     <>
       <Helmet>
-        <title>{formatMessage(messages.pageTitle)} | PRO ANALYTICS</title>
-        <link rel="shortcut icon" href={`${getConfig().MARKETING_URL}/favicon.ico`} type="image/x-icon" />
+        <title>{formatMessage(messages.pageTitle)}</title>
+        <link rel="shortcut icon" href={getConfig().FAVICON_URL} type="image/x-icon" />
       </Helmet>
       <div>
         <AppWrapper>

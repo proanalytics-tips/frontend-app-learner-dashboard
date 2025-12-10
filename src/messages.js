@@ -15,7 +15,7 @@ const messages = defineMessages({
   pageTitle: {
     id: "learner-dash.title",
     description: "Page title: Learner Home",
-    defaultMessage: "Dashboard",
+    defaultMessage: "Learner Home",
   },
 });
 
